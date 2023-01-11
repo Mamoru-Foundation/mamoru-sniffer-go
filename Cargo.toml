@@ -1,0 +1,16 @@
+[package]
+name = "mamoru-sniffer-go"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+[profile.release]
+opt-level = "z"
+strip = true
+lto = true
+
+[dependencies]
+# mamoru-evm-types-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "2b7b28d62540e78621475ef418c393759eba3168"}
+mamoru-sniffer-c = { path = "../mamoru-core/mamoru-sniffer-c" }
