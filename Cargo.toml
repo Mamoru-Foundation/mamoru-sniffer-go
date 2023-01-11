@@ -12,5 +12,4 @@ strip = true
 lto = true
 
 [dependencies]
-# mamoru-evm-types-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "2b7b28d62540e78621475ef418c393759eba3168"}
-mamoru-sniffer-c = { path = "../mamoru-core/mamoru-sniffer-c" }
+mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "926b7b5bb7b754053077a6fff7eaa165f7a16501"}
