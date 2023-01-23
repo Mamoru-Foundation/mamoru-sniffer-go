@@ -22,26 +22,21 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 
 		builder.AddData(evm_types.NewTransactionData([]evm_types.Transaction{
 			{
-				Index:      1,
+				TxIndex:    2,
+				TxHash:     "hash",
+				Type:       0,
+				Nonce:      2123,
+				Status:     1,
 				BlockIndex: 2,
-				Hash:       []byte{3, 4, 5},
-				Type:       6,
-				Nonce:      7,
-				Status:     "completed",
-				Timestamp:  42,
-				From:       []byte{7, 8, 9},
-				To:         []byte{7, 8, 9},
-			},
-			{
-				Index:      1,
-				BlockIndex: 2,
-				Hash:       []byte{3, 4, 5},
-				Type:       6,
-				Nonce:      7,
-				Status:     "completed",
-				Timestamp:  42,
-				From:       []byte{7, 8, 9},
-				To:         []byte{7, 8, 9},
+				Timestamp:  uint64(time.Now().Unix()),
+				From:       "from",
+				To:         "to",
+				Value:      123123,
+				Fee:        122,
+				GasPrice:   12,
+				GasLimit:   123,
+				GasUsed:    123,
+				Method:     "some_method",
 			},
 		}))
 
@@ -61,26 +56,21 @@ func TestSnifferSmoke(t *testing.T) {
 
 	builder.AddData(evm_types.NewTransactionData([]evm_types.Transaction{
 		{
-			Index:      1,
-			BlockIndex: 2,
-			Hash:       []byte{3, 4, 5},
-			Type:       6,
-			Nonce:      7,
-			Status:     "completed",
-			Timestamp:  42,
-			From:       []byte{7, 8, 9},
-			To:         []byte{7, 8, 9},
-		},
-		{
-			Index:      1,
-			BlockIndex: 2,
-			Hash:       []byte{3, 4, 5},
-			Type:       6,
-			Nonce:      7,
-			Status:     "completed",
-			Timestamp:  42,
-			From:       []byte{7, 8, 9},
-			To:         []byte{7, 8, 9},
+			TxIndex:    0,
+			TxHash:     "",
+			Type:       0,
+			Nonce:      0,
+			Status:     0,
+			BlockIndex: 0,
+			Timestamp:  0,
+			From:       "",
+			To:         "",
+			Value:      0,
+			Fee:        0,
+			GasPrice:   0,
+			GasLimit:   0,
+			GasUsed:    0,
+			Method:     "some_method",
 		},
 	}))
 
@@ -95,7 +85,7 @@ var sniffer *mamoru_sniffer.Sniffer
 func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "SUI_DEVNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "7EiTMlvnm0zUIoozWIkx00+H+2U9MhRxwooF/yN/ofc=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "XWDJ6pY2rSSoN0QvgXsZUTjHkww063IEV5K/ihblVDw=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 
 	mutex.Lock()
