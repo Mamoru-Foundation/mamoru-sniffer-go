@@ -6,8 +6,8 @@ GENERATOR:
   FlagGroups:
     - { name: CFLAGS, flags: [ "-I${SRCDIR}/../packaged/include" ] }
     - { name: LDFLAGS, flags: [ "-lmamoru_sniffer_go" ] }
-    - { name: LDFLAGS, traits: [ "darwin", "arm64" ], flags: [ "-framework Security -L${SRCDIR}/../packaged/lib/darwin-arm64" ] }
-    - { name: LDFLAGS, traits: [ "linux", "amd64" ], flags: [ "-Wl,--no-as-needed -ldl -lm -L${SRCDIR}/../packaged/lib/linux-amd64" ] }
+    - { name: LDFLAGS, traits: [ "darwin,arm64" ], flags: [ "-framework Security -L${SRCDIR}/../packaged/lib/darwin-arm64" ] }
+    - { name: LDFLAGS, traits: [ "linux,amd64" ], flags: [ "-Wl,--no-as-needed -ldl -lm -L${SRCDIR}/../packaged/lib/linux-amd64" ] }
   Options:
     SafeStrings: true
 
@@ -28,8 +28,20 @@ TRANSLATOR:
       - { target: "^new_value_data", tips: [ ref ] }
       - { target: "^value_list_append", tips: [ ref, ref ] }
       - { target: "^value_struct_add_field", tips: [ ref, 0, ref ] }
+      - { target: "^transaction_arg_batch_finish", tips: [ ref ] }
+      - { target: "^transaction_arg_batch_append", tips: [ ref ] }
       - { target: "^transaction_batch_append", tips: [ ref ] }
       - { target: "^transaction_batch_finish", tips: [ ref ] }
+      - { target: "^call_trace_batch_append", tips: [ ref ] }
+      - { target: "^call_trace_batch_finish", tips: [ ref ] }
+      - { target: "^call_trace_arg_batch_append", tips: [ ref ] }
+      - { target: "^call_trace_arg_batch_finish", tips: [ ref ] }
+      - { target: "^block_batch_append", tips: [ ref ] }
+      - { target: "^block_batch_finish", tips: [ ref ] }
+      - { target: "^event_batch_append", tips: [ ref ] }
+      - { target: "^event_batch_finish", tips: [ ref ] }
+      - { target: "^event_topic_batch_append", tips: [ ref ] }
+      - { target: "^event_topic_batch_finish", tips: [ ref ] }
     struct:
       - { target: "^slice_(.+)_t", tips: [ sref ] }
   Rules:
@@ -40,8 +52,13 @@ TRANSLATOR:
       - { action: accept, from: "^sniffer_" }
       - { action: accept, from: "^blockchain_" }
       - { action: accept, from: "^value_" }
-      - { action: accept, from: "^transaction_" }
       - { action: accept, from: "^slice_(.+)_t" }
+      - { action: accept, from: "^transaction_" }
+      - { action: accept, from: "^call_trace_" }
+      - { action: accept, from: "^block_" }
+      - { action: accept, from: "^event_" }
+      - { action: accept, from: "^event_topic_" }
+
       - { transform: export }
     post-global:
       - { action: replace, from: _$ }
