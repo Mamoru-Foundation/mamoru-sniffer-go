@@ -16,15 +16,14 @@ type CallTrace struct {
 	Value      uint64
 	GasLimit   uint64
 	GasUsed    uint64
-	Input      string
-	MethodId   string
+	Input      []byte
 }
 
 func NewCallTraceData(txs []CallTrace) mamoru_sniffer.BlockchainData {
 	batch := generated_bindings.NewCallTraceBatch()
 
 	for _, tx := range txs {
-
+		input := sliceToFfi(tx.Input)
 		generated_bindings.CallTraceBatchAppend(
 			batch,
 			tx.Seq,
@@ -37,8 +36,9 @@ func NewCallTraceData(txs []CallTrace) mamoru_sniffer.BlockchainData {
 			tx.Value,
 			tx.GasLimit,
 			tx.GasUsed,
-			tx.MethodId,
+			input,
 		)
+		freeFfiSlice(input)
 	}
 
 	data := generated_bindings.CallTraceBatchFinish(batch)

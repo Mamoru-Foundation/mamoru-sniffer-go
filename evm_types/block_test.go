@@ -13,29 +13,19 @@ func BenchmarkBlockDataCtxBuilder(b *testing.B) {
 
 		builder.AddData(NewBlockData([]Block{
 			{
-				BlockIndex:                 0,
-				Hash:                       "",
-				ParentHash:                 "",
-				StateRoot:                  "",
-				Nonce:                      0,
-				Status:                     "",
-				Timestamp:                  0,
-				BlockReward:                nil,
-				FeeRecipient:               "",
-				TotalDifficulty:            0,
-				Size:                       0,
-				GasUsed:                    0,
-				GasLimit:                   0,
-				BurntFees:                  nil,
-				PosProposedOnTime:          0,
-				PosSlot:                    0,
-				PosEpoch:                   0,
-				PosProposerIndex:           0,
-				PosSlotRootHash:            nil,
-				PosBeaconChainDepositCount: 0,
-				PosSlotGraffiti:            nil,
-				PosBlockRandomness:         nil,
-				PosRandomReveal:            nil,
+				BlockIndex:      0,
+				Hash:            "",
+				ParentHash:      "",
+				StateRoot:       "",
+				Nonce:           0,
+				Status:          "",
+				Timestamp:       0,
+				BlockReward:     nil,
+				FeeRecipient:    "",
+				TotalDifficulty: 0,
+				Size:            0,
+				GasUsed:         0,
+				GasLimit:        0,
 			},
 		}))
 
@@ -45,33 +35,21 @@ func BenchmarkBlockDataCtxBuilder(b *testing.B) {
 
 func TestBlockDataCtxBuilder(t *testing.T) {
 	builder := mamoru_sniffer.NewBlockchainDataCtxBuilder()
-	data := NewBlockData([]Block{
-		{
-			BlockIndex:                 0,
-			Hash:                       "",
-			ParentHash:                 "",
-			StateRoot:                  "",
-			Nonce:                      0,
-			Status:                     "",
-			Timestamp:                  0,
-			BlockReward:                nil,
-			FeeRecipient:               "",
-			TotalDifficulty:            0,
-			Size:                       0,
-			GasUsed:                    0,
-			GasLimit:                   0,
-			BurntFees:                  nil,
-			PosProposedOnTime:          0,
-			PosSlot:                    0,
-			PosEpoch:                   0,
-			PosProposerIndex:           0,
-			PosSlotRootHash:            nil,
-			PosBeaconChainDepositCount: 0,
-			PosSlotGraffiti:            nil,
-			PosBlockRandomness:         nil,
-			PosRandomReveal:            nil,
-		},
-	})
+	data := NewBlockData([]Block{{
+		BlockIndex:      0,
+		Hash:            "",
+		ParentHash:      "",
+		StateRoot:       "",
+		Nonce:           0,
+		Status:          "",
+		Timestamp:       0,
+		BlockReward:     nil,
+		FeeRecipient:    "",
+		TotalDifficulty: 0,
+		Size:            0,
+		GasUsed:         0,
+		GasLimit:        0,
+	}})
 
 	assert.NotNil(t, data)
 

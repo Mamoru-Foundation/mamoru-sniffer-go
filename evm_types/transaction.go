@@ -12,7 +12,6 @@ type Transaction struct {
 	Nonce      uint64
 	Status     uint64
 	BlockIndex uint64
-	Timestamp  uint64
 	From       string
 	To         string
 	Value      uint64
@@ -21,14 +20,14 @@ type Transaction struct {
 	GasLimit   uint64
 	GasUsed    uint64
 	Size       float64
-	Method     string
+	Input      []byte
 }
 
 func NewTransactionData(txs []Transaction) mamoru_sniffer.BlockchainData {
 	batch := generated_bindings.NewTransactionBatch()
 
 	for _, tx := range txs {
-
+		input := sliceToFfi(tx.Input)
 		generated_bindings.TransactionBatchAppend(
 			batch,
 			tx.TxIndex,
@@ -37,7 +36,6 @@ func NewTransactionData(txs []Transaction) mamoru_sniffer.BlockchainData {
 			tx.Type,
 			tx.Nonce,
 			tx.Status,
-			tx.Timestamp,
 			tx.From,
 			tx.To,
 			tx.Value,
@@ -45,10 +43,10 @@ func NewTransactionData(txs []Transaction) mamoru_sniffer.BlockchainData {
 			tx.GasPrice,
 			tx.GasLimit,
 			tx.GasUsed,
-			tx.Method,
+			input,
 			tx.Size,
 		)
-
+		freeFfiSlice(input)
 	}
 
 	data := generated_bindings.TransactionBatchFinish(batch)

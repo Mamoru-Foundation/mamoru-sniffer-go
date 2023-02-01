@@ -28,8 +28,6 @@ TRANSLATOR:
       - { target: "^new_value_data", tips: [ ref ] }
       - { target: "^value_list_append", tips: [ ref, ref ] }
       - { target: "^value_struct_add_field", tips: [ ref, 0, ref ] }
-      - { target: "^transaction_arg_batch_finish", tips: [ ref ] }
-      - { target: "^transaction_arg_batch_append", tips: [ ref ] }
       - { target: "^transaction_batch_append", tips: [ ref ] }
       - { target: "^transaction_batch_finish", tips: [ ref ] }
       - { target: "^call_trace_batch_append", tips: [ ref ] }
