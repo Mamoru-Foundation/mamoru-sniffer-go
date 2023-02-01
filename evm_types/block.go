@@ -5,24 +5,6 @@ import (
 	"github.com/Mamoru-Foundation/mamoru-sniffer-go/mamoru_sniffer"
 )
 
-/*
-	pub struct Block {
-	    pub block_index: u64,
-	    pub hash: String,
-	    pub parent_hash: String,
-	    pub state_root: String,
-	    pub nonce: u64,
-	    pub status: String,
-	    pub timestamp: u64,
-	    pub block_reward: Vec<u8>,
-	    pub fee_recipient: String,
-	    pub total_difficulty: u64,
-	    pub size: f64,
-	    pub gas_used: u64,
-	    pub gas_limit: u64,
-
-}
-*/
 type Block struct {
 	BlockIndex      uint64
 	Hash            string
