@@ -21,8 +21,7 @@ func BenchmarkCallTraceDataCtxBuilder(b *testing.B) {
 				Value:      0,
 				GasLimit:   0,
 				GasUsed:    0,
-				Input:      "",
-				MethodId:   "",
+				Input:      []byte{1, 2, 3, 4, 5},
 				Depth:      1,
 			},
 			{
@@ -34,9 +33,8 @@ func BenchmarkCallTraceDataCtxBuilder(b *testing.B) {
 				Value:      0,
 				GasLimit:   123,
 				GasUsed:    0,
-				Input:      "string",
-				MethodId:   "string",
-				Depth:      1,
+				Depth:      2,
+				Input:      []byte{1, 2, 3, 4, 5},
 			},
 		}))
 
@@ -58,8 +56,7 @@ func TestCallTraceDataCtxBuilder(t *testing.T) {
 			Value:      0,
 			GasLimit:   0,
 			GasUsed:    0,
-			Input:      "",
-			MethodId:   "",
+			Input:      []byte{1, 2, 3, 4, 5},
 		},
 		{
 			Depth:      2,
@@ -71,8 +68,7 @@ func TestCallTraceDataCtxBuilder(t *testing.T) {
 			Value:      123,
 			GasLimit:   123,
 			GasUsed:    321,
-			Input:      "string",
-			MethodId:   "string",
+			Input:      []byte{1, 2, 3, 4, 5},
 		},
 	})
 

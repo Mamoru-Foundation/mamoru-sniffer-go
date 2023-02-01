@@ -19,7 +19,6 @@ func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
 				Nonce:      0,
 				Status:     0,
 				BlockIndex: 0,
-				Timestamp:  0,
 				From:       "",
 				To:         "",
 				Value:      0,
@@ -28,7 +27,7 @@ func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
 				GasLimit:   0,
 				GasUsed:    0,
 				Size:       .0,
-				Method:     "",
+				Input:      nil,
 			},
 			{
 				TxIndex:    1,
@@ -37,7 +36,6 @@ func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
 				Nonce:      29876,
 				Status:     0,
 				BlockIndex: 1,
-				Timestamp:  uint64(time.Now().Unix()),
 				From:       "hash",
 				To:         "",
 				Value:      12345,
@@ -46,7 +44,7 @@ func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
 				GasLimit:   0,
 				GasUsed:    0,
 				Size:       123.1123,
-				Method:     "method",
+				Input:      []byte{1, 2, 3, 4},
 			},
 		}))
 
@@ -65,7 +63,6 @@ func TestBlockchainDataCtxBuilder(t *testing.T) {
 			Nonce:      0,
 			Status:     0,
 			BlockIndex: 0,
-			Timestamp:  0,
 			From:       "",
 			To:         "",
 			Value:      0,
@@ -74,7 +71,7 @@ func TestBlockchainDataCtxBuilder(t *testing.T) {
 			GasLimit:   0,
 			GasUsed:    0,
 			Size:       123.1123,
-			Method:     "",
+			Input:      []byte{1, 2, 3, 4},
 		},
 		{
 			TxIndex:    0,
@@ -83,7 +80,6 @@ func TestBlockchainDataCtxBuilder(t *testing.T) {
 			Nonce:      29876,
 			Status:     0,
 			BlockIndex: 0,
-			Timestamp:  uint64(time.Now().Unix()),
 			From:       "hash",
 			To:         "to_hash",
 			Value:      12345,
@@ -92,7 +88,7 @@ func TestBlockchainDataCtxBuilder(t *testing.T) {
 			GasLimit:   0,
 			GasUsed:    0,
 			Size:       123.1123,
-			Method:     "method",
+			Input:      []byte{1, 2, 3, 4},
 		},
 	})
 
