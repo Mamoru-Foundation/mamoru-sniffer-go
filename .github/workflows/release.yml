@@ -64,7 +64,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Install Protoc
-        uses: arduino/setup-protoc@v1
+        # this commit uses node16, the latest release uses node12 that is not available under macOS
+        uses: arduino/setup-protoc@ab6203da1c3118e4406048171b09238ad31ad73e
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
