@@ -2,7 +2,6 @@ package mamoru_sniffer
 
 import (
 	"github.com/Mamoru-Foundation/mamoru-sniffer-go/generated_bindings"
-	"time"
 )
 
 type BlockchainData struct {
@@ -33,8 +32,8 @@ func (b BlockchainDataCtxBuilder) AddData(data BlockchainData) bool {
 	return ok
 }
 
-func (b BlockchainDataCtxBuilder) Finish(txId string, txHash string, txTime time.Time) BlockchainDataCtx {
-	ctx := generated_bindings.BlockchainDataCtxBuilderFinish(b.FfiBlockchainDataCtxBuilderT, txId, txHash, txTime.Unix())
+func (b BlockchainDataCtxBuilder) Finish(txId string, txHash string) BlockchainDataCtx {
+	ctx := generated_bindings.BlockchainDataCtxBuilderFinish(b.FfiBlockchainDataCtxBuilderT, txId, txHash)
 
 	return BlockchainDataCtx{ctx}
 }
