@@ -7,7 +7,6 @@ import (
 	"os"
 	"sync"
 	"testing"
-	"time"
 )
 
 func BenchmarkSnifferSmoke(b *testing.B) {
@@ -28,7 +27,6 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 				Nonce:      2123,
 				Status:     1,
 				BlockIndex: 2,
-				Timestamp:  uint64(time.Now().Unix()),
 				From:       "from",
 				To:         "to",
 				Value:      123123,
@@ -36,11 +34,10 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 				GasPrice:   12,
 				GasLimit:   123,
 				GasUsed:    123,
-				Method:     "some_method",
 			},
 		}))
 
-		ctx := builder.Finish("one", "two", time.Now())
+		ctx := builder.Finish("one", "two")
 
 		sniffer.ObserveData(ctx)
 	}
@@ -62,7 +59,6 @@ func TestSnifferSmoke(t *testing.T) {
 			Nonce:      0,
 			Status:     0,
 			BlockIndex: 0,
-			Timestamp:  0,
 			From:       "",
 			To:         "",
 			Value:      0,
@@ -70,11 +66,10 @@ func TestSnifferSmoke(t *testing.T) {
 			GasPrice:   0,
 			GasLimit:   0,
 			GasUsed:    0,
-			Method:     "some_method",
 		},
 	}))
 
-	ctx := builder.Finish("one", "two", time.Now())
+	ctx := builder.Finish("one", "two")
 
 	sniffer.ObserveData(ctx)
 }

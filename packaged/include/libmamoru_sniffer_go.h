@@ -196,8 +196,7 @@ bool blockchain_data_ctx_builder_add_data (
 FfiBlockchainDataCtx_t * blockchain_data_ctx_builder_finish (
     FfiBlockchainDataCtxBuilder_t * builder,
     char const * tx_id,
-    char const * tx_hash,
-    int64_t tx_timestamp_secs);
+    char const * tx_hash);
 
 typedef struct FfiValue FfiValue_t;
 

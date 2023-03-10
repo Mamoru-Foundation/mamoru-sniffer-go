@@ -4,7 +4,6 @@ import (
 	"github.com/Mamoru-Foundation/mamoru-sniffer-go/mamoru_sniffer"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"time"
 )
 
 func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
@@ -48,7 +47,7 @@ func BenchmarkBlockchainDataCtxBuilder(b *testing.B) {
 			},
 		}))
 
-		_ = builder.Finish("some-id", "some-hash", time.Now())
+		_ = builder.Finish("some-id", "some-hash")
 	}
 }
 
@@ -96,5 +95,5 @@ func TestBlockchainDataCtxBuilder(t *testing.T) {
 
 	builder.AddData(data)
 
-	_ = builder.Finish("some-id", "some-hash", time.Now())
+	_ = builder.Finish("some-id", "some-hash")
 }
