@@ -1,4 +1,4 @@
-package evm_types
+package mamoru_sniffer
 
 /*
 #include <stdlib.h>
