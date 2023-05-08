@@ -22,20 +22,17 @@ TRANSLATOR:
     function:
       - { target: "^sniffer_result_get_error_message", self: ref, tips: [ ref, ref ] }
       - { target: "^sniffer_result_get_sniffer", tips: [ ref, ref ] }
-      - { target: "^sniffer_observe_data", tips: [ ref, ref ] }
-      - { target: "^blockchain_data_ctx_builder_add_data", tips: [ ref, ref ] }
-      - { target: "^blockchain_data_ctx_builder_finish", tips: [ ref ] }
+      - { target: "^evm_sniffer_observe_data", tips: [ ref, ref ] }
+      - { target: "^evm_blockchain_data_builder_finish", tips: [ ref ] }
+      - { target: "^evm_block_set", tips: [ ref ] }
+      - { target: "^evm_(.+)_append", tips: [ ref ] }
       - { target: "^new_value_data", tips: [ ref ] }
       - { target: "^value_list_append", tips: [ ref, ref ] }
       - { target: "^value_struct_add_field", tips: [ ref, 0, ref ] }
       - { target: "^transaction_batch_append", tips: [ ref ] }
-      - { target: "^transaction_batch_finish", tips: [ ref ] }
       - { target: "^call_trace_batch_append", tips: [ ref ] }
-      - { target: "^call_trace_batch_finish", tips: [ ref ] }
       - { target: "^block_batch_append", tips: [ ref ] }
-      - { target: "^block_batch_finish", tips: [ ref ] }
       - { target: "^event_batch_append", tips: [ ref ] }
-      - { target: "^event_batch_finish", tips: [ ref ] }
     struct:
       - { target: "^slice_(.+)_t", tips: [ sref ] }
   Rules:
@@ -43,14 +40,11 @@ TRANSLATOR:
       - { transform: title }
       - { action: accept, from: "^Ffi" }
       - { action: accept, from: "^new_" }
+      - { action: accept, from: "^evm_" }
       - { action: accept, from: "^sniffer_" }
       - { action: accept, from: "^blockchain_" }
       - { action: accept, from: "^value_" }
       - { action: accept, from: "^slice_(.+)_t" }
-      - { action: accept, from: "^transaction_" }
-      - { action: accept, from: "^call_trace_" }
-      - { action: accept, from: "^block_" }
-      - { action: accept, from: "^event_" }
 
       - { transform: export }
     post-global:

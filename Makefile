@@ -17,11 +17,9 @@ build-rust-release:
 	cp target/release/$(LIB_NAME) $(BINARY_DIR)/
 
 test:
-	GODEBUG=cgocheck=2 go test ./evm_types -v
 	GODEBUG=cgocheck=2 go test ./mamoru_sniffer -v
 
 bench:
-	GODEBUG=cgocheck=2 go test -bench=. ./evm_types -v
 	GODEBUG=cgocheck=2 go test -bench=. ./mamoru_sniffer -v
 
 # Requires manual setup for now

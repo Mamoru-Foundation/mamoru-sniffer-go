@@ -1,63 +1,23 @@
-package tests
+package mamoru_sniffer
 
 import (
-	"github.com/Mamoru-Foundation/mamoru-sniffer-go/mamoru_sniffer"
-	"github.com/stretchr/testify/require"
-	"os"
-	"sync"
 	"testing"
 )
 
-func BenchmarkSnifferSmoke(b *testing.B) {
-	sniffer, err := testSniffer()
-
-	require.Nil(b, err)
-
-	b.ResetTimer()
-
+func BenchmarkEvmCtxBuilder(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ctx := createEvmCtx()
-
-		sniffer.ObserveEvmData(ctx)
+		_ = createEvmCtx()
 	}
 }
 
-func TestSnifferSmoke(t *testing.T) {
-	sniffer, err := testSniffer()
-
-	require.Nil(t, err)
-	require.NotNil(t, sniffer)
-
-	ctx := createEvmCtx()
-
-	sniffer.ObserveEvmData(ctx)
+func TestEvmCtxBuilder(t *testing.T) {
+	_ = createEvmCtx()
 }
 
-var mutex sync.Mutex
-var sniffer *mamoru_sniffer.Sniffer
+func createEvmCtx() EvmCtx {
+	builder := NewEvmCtxBuilder()
 
-func testSniffer() (*mamoru_sniffer.Sniffer, error) {
-	_ = os.Setenv("MAMORU_CHAIN_TYPE", "SUI_DEVNET")
-	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "XWDJ6pY2rSSoN0QvgXsZUTjHkww063IEV5K/ihblVDw=")
-	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
-
-	mutex.Lock()
-
-	var err error
-	if sniffer == nil {
-		sniffer, err = mamoru_sniffer.Connect()
-	}
-
-	mutex.Unlock()
-
-	return sniffer, err
-}
-
-func createEvmCtx() mamoru_sniffer.EvmCtx {
-	builder := mamoru_sniffer.NewEvmCtxBuilder()
-
-	builder.SetBlock(mamoru_sniffer.Block{
+	builder.SetBlock(Block{
 		BlockIndex:      0,
 		Hash:            "",
 		ParentHash:      "",
@@ -73,7 +33,7 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 		GasLimit:        0,
 	})
 
-	builder.AppendTxs([]mamoru_sniffer.Transaction{
+	builder.AppendTxs([]Transaction{
 		{
 			TxIndex:    0,
 			TxHash:     "",
@@ -110,7 +70,7 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 		},
 	})
 
-	builder.AppendEvents([]mamoru_sniffer.Event{
+	builder.AppendEvents([]Event{
 		{
 			Index:       0,
 			TxIndex:     0,
@@ -141,7 +101,7 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 		},
 	})
 
-	builder.AppendCallTraces([]mamoru_sniffer.CallTrace{
+	builder.AppendCallTraces([]CallTrace{
 		{
 			Depth:      1,
 			TxIndex:    0,

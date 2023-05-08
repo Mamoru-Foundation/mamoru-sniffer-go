@@ -26,7 +26,7 @@ func Connect() (*Sniffer, error) {
 	return &Sniffer{ffiSniffer}, nil
 }
 
-// Sends data to Mamoru
-func (s Sniffer) ObserveData(data BlockchainDataCtx) {
-	generated_bindings.SnifferObserveData(s.FfiSnifferT, data.FfiBlockchainDataCtxT)
+// Sends EVM data to Mamoru
+func (s Sniffer) ObserveEvmData(data EvmCtx) {
+	generated_bindings.EvmSnifferObserveData(s.FfiSnifferT, data.FfiEvmBlockchainDataCtxT)
 }
