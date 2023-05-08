@@ -12,5 +12,5 @@ strip = true
 lto = true
 
 [dependencies]
-mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "13ae3903607438698306f4235f1023a54ee1b5a3"}
+mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "c2f5e12990ea185b12a6a1b748a84061321aab2e"}
 #mamoru-sniffer-c = {path = "../mamoru-core/mamoru-sniffer-c"}
