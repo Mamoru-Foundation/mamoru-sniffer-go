@@ -16,6 +16,11 @@ build-rust-release:
 	mkdir -p $(BINARY_DIR)
 	cp target/release/$(LIB_NAME) $(BINARY_DIR)/
 
+build-rust-release-macos-aarch64:
+	cargo build --release --target aarch64-apple-darwin
+	mkdir -p ./lib/darwin-arm64/
+	cp target/aarch64-apple-darwin/release/$(LIB_NAME) ./packaged/lib/darwin-arm64/
+
 test:
 	GODEBUG=cgocheck=2 go test ./mamoru_sniffer -v
 
