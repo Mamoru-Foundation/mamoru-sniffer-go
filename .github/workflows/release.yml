@@ -34,7 +34,11 @@ jobs:
     needs: prepare-branch
     strategy:
       matrix:
-        runner: [ self-hosted, self-hosted-m1 ]
+        include:
+          - runner: self-hosted
+            platform: linux
+          - runner: macos-13-xl
+            platform: darwin
     runs-on: ${{ matrix.runner }}
     env:
       CARGO_NET_GIT_FETCH_WITH_CLI: true
@@ -55,37 +59,37 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           override: true
+          target: ${{ matrix.platform == 'darwin' && 'aarch64-apple-darwin' || '' }}
 
-      - name: Set up Go
+      - uses: Swatinem/rust-cache@v2
+
+      - if: matrix.platform == 'linux'
+        name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.19
 
-      - uses: Swatinem/rust-cache@v2
-
-        # The protoc is installed manually on the macOS runner
-        # `arduino/setup-protoc` doesn't support M1 Macs yet
-      - if: matrix.runner == 'self-hosted'
-        name: Install Protoc
+      - name: Install Protoc
         uses: arduino/setup-protoc@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - if: matrix.runner == 'self-hosted'
+      - if: matrix.platform == 'linux'
         name: Build the binary
         run: |
           make build-rust-release
           git add -f ./packaged/lib/linux-amd64/libmamoru_sniffer_go.a
           git commit -m "Add 'linux-amd64' binary"
 
-      - if: matrix.runner == 'self-hosted-m1'
+      - if: matrix.platform == 'darwin'
         name: Build the binary
         run: |
-          make build-rust-release
+          make build-rust-release-macos-aarch64
           git add -f ./packaged/lib/darwin-arm64/libmamoru_sniffer_go.a
           git commit -m "Add 'darwin-arm64' binary"
 
-      - name: Run tests
+      - if: matrix.platform == 'linux'
+        name: Run tests
         run: |
           make test
           make bench
