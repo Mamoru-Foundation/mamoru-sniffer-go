@@ -16,8 +16,20 @@ func NewEvmCtxBuilder() EvmCtxBuilder {
 	return EvmCtxBuilder{builder}
 }
 
-func (b EvmCtxBuilder) Finish(txId string, txHash string) EvmCtx {
-	ctx := generated_bindings.EvmBlockchainDataBuilderFinish(b.FfiEvmBlockchainDataBuilderT, txId, txHash)
+func (b EvmCtxBuilder) SetTxData(txId string, txHash string) {
+	generated_bindings.EvmBlockchainDataBuilderSetTx(b.FfiEvmBlockchainDataBuilderT, txId, txHash)
+}
+
+func (b EvmCtxBuilder) SetBlockData(blockId string, blockHash string) {
+	generated_bindings.EvmBlockchainDataBuilderSetBlock(b.FfiEvmBlockchainDataBuilderT, blockId, blockHash)
+}
+
+func (b EvmCtxBuilder) SetMempoolSource() {
+	generated_bindings.EvmBlockchainDataBuilderSetMempoolSource(b.FfiEvmBlockchainDataBuilderT)
+}
+
+func (b EvmCtxBuilder) Finish() EvmCtx {
+	ctx := generated_bindings.EvmBlockchainDataBuilderFinish(b.FfiEvmBlockchainDataBuilderT)
 
 	return EvmCtx{ctx}
 }
