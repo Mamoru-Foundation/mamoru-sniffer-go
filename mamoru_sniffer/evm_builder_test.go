@@ -128,5 +128,9 @@ func createEvmCtx() EvmCtx {
 		},
 	})
 
-	return builder.Finish("some-id", "some-hash")
+	builder.SetTxData("some-id", "some-hash")
+	builder.SetBlockData("some-id", "some-hash")
+	builder.SetMempoolSource()
+
+	return builder.Finish()
 }
