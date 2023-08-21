@@ -131,7 +131,7 @@ func createEvmCtx() EvmCtx {
 	builder.SetTxData("some-id", "some-hash")
 	builder.SetBlockData("some-id", "some-hash")
 	builder.SetMempoolSource()
-	builder.SetStatistic(1, 2, 3, 4)
+	builder.SetStatistics(1, 2, 3, 4)
 
 	return builder.Finish()
 }

@@ -95,7 +95,7 @@ void evm_blockchain_data_builder_set_block (
 void evm_blockchain_data_builder_set_mempool_source (
     FfiEvmBlockchainDataBuilder_t * builder);
 
-void evm_blockchain_data_builder_set_statistic (
+void evm_blockchain_data_builder_set_statistics (
     FfiEvmBlockchainDataBuilder_t * builder,
     uint64_t blocks,
     uint64_t transactions,

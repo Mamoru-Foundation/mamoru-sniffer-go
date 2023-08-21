@@ -39,8 +39,9 @@ var sniffer *mamoru_sniffer.Sniffer
 func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "ETH_TESTNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "Es20gMqolfuxLuHyFtcK6gFgTlIXljUil0XP6jEjRFA=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "9eXL1PEfb7XCBWv2J8Jl+1TwRwlcaGHR5HN9cE93tCI=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
+	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "10")
 
 	mutex.Lock()
 
@@ -169,7 +170,7 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 	})
 	builder.SetMempoolSource()
 
-	builder.SetStatistic(1, 20, 30, 40)
+	builder.SetStatistics(1, 20, 30, 40)
 
 	return builder.Finish()
 }
