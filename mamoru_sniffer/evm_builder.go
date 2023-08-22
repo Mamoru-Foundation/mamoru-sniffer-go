@@ -28,6 +28,10 @@ func (b EvmCtxBuilder) SetMempoolSource() {
 	generated_bindings.EvmBlockchainDataBuilderSetMempoolSource(b.FfiEvmBlockchainDataBuilderT)
 }
 
+func (b EvmCtxBuilder) SetStatistics(blocks, txs, events, callTraces uint64) {
+	generated_bindings.EvmBlockchainDataBuilderSetStatistics(b.FfiEvmBlockchainDataBuilderT, blocks, txs, events, callTraces)
+}
+
 func (b EvmCtxBuilder) Finish() EvmCtx {
 	ctx := generated_bindings.EvmBlockchainDataBuilderFinish(b.FfiEvmBlockchainDataBuilderT)
 
