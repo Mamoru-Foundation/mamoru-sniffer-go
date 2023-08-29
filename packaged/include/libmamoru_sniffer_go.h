@@ -14,70 +14,6 @@
 extern "C" {
 #endif
 
-typedef struct FfiSnifferResult FfiSnifferResult_t;
-
-FfiSnifferResult_t * new_sniffer (void);
-
-/** \brief
- *  Returns a pointer to C-like string or NULL if there is no error.
- */
-char * sniffer_result_get_error_message (
-    FfiSnifferResult_t const * result);
-
-typedef struct FfiSniffer FfiSniffer_t;
-
-/** \brief
- *  Returns a pointer to `FfiSniffer` or NULL.
- *  Frees `result` arguments, so be sure to call `sniffer_result_get_error_message` to get an error message.
- */
-FfiSniffer_t * sniffer_result_get_sniffer (
-    FfiSnifferResult_t * result);
-
-typedef struct FfiValue FfiValue_t;
-
-typedef struct FfiValueData FfiValueData_t;
-
-/** \brief
- *  Frees `value` argument.
- */
-FfiValueData_t * new_value_data (
-    FfiValue_t * value);
-
-
-#include <stdbool.h>
-
-FfiValue_t * new_value_bool (
-    bool data);
-
-
-#include <stddef.h>
-#include <stdint.h>
-
-FfiValue_t * new_value_u64 (
-    uint64_t data);
-
-FfiValue_t * new_value_list (void);
-
-/** \brief
- *  Returns `true` if success.
- *  Frees `data` argument.
- */
-bool value_list_append (
-    FfiValue_t * value_list,
-    FfiValue_t * data);
-
-FfiValue_t * new_value_struct (
-    char const * ty);
-
-/** \brief
- *  Returns `true` if success.
- *  Frees `data` argument.
- */
-bool value_struct_add_field (
-    FfiValue_t * value_struct,
-    char const * key,
-    FfiValue_t * data);
-
 typedef struct FfiEvmBlockchainDataBuilder FfiEvmBlockchainDataBuilder_t;
 
 FfiEvmBlockchainDataBuilder_t * new_evm_blockchain_data_builder (void);
@@ -95,6 +31,10 @@ void evm_blockchain_data_builder_set_block (
 void evm_blockchain_data_builder_set_mempool_source (
     FfiEvmBlockchainDataBuilder_t * builder);
 
+
+#include <stddef.h>
+#include <stdint.h>
+
 void evm_blockchain_data_builder_set_statistics (
     FfiEvmBlockchainDataBuilder_t * builder,
     uint64_t blocks,
@@ -109,6 +49,8 @@ typedef struct FfiEvmBlockchainDataCtx FfiEvmBlockchainDataCtx_t;
  */
 FfiEvmBlockchainDataCtx_t * evm_blockchain_data_builder_finish (
     FfiEvmBlockchainDataBuilder_t * builder);
+
+typedef struct FfiSniffer FfiSniffer_t;
 
 /** \brief
  *  Frees `data` argument.
@@ -206,6 +148,64 @@ void evm_event_append (
     slice_ref_uint8_t topic3,
     slice_ref_uint8_t topic4,
     slice_ref_uint8_t data);
+
+typedef struct FfiSnifferResult FfiSnifferResult_t;
+
+FfiSnifferResult_t * new_sniffer (void);
+
+/** \brief
+ *  Returns a pointer to C-like string or NULL if there is no error.
+ */
+char * sniffer_result_get_error_message (
+    FfiSnifferResult_t const * result);
+
+/** \brief
+ *  Returns a pointer to `FfiSniffer` or NULL.
+ *  Frees `result` arguments, so be sure to call `sniffer_result_get_error_message` to get an error message.
+ */
+FfiSniffer_t * sniffer_result_get_sniffer (
+    FfiSnifferResult_t * result);
+
+typedef struct FfiValue FfiValue_t;
+
+typedef struct FfiValueData FfiValueData_t;
+
+/** \brief
+ *  Frees `value` argument.
+ */
+FfiValueData_t * new_value_data (
+    FfiValue_t * value);
+
+
+#include <stdbool.h>
+
+FfiValue_t * new_value_bool (
+    bool data);
+
+FfiValue_t * new_value_u64 (
+    uint64_t data);
+
+FfiValue_t * new_value_list (void);
+
+/** \brief
+ *  Returns `true` if success.
+ *  Frees `data` argument.
+ */
+bool value_list_append (
+    FfiValue_t * value_list,
+    FfiValue_t * data);
+
+FfiValue_t * new_value_struct (
+    char const * ty);
+
+/** \brief
+ *  Returns `true` if success.
+ *  Frees `data` argument.
+ */
+bool value_struct_add_field (
+    FfiValue_t * value_struct,
+    char const * key,
+    FfiValue_t * data);
 
 
 #ifdef __cplusplus
