@@ -39,7 +39,7 @@ var sniffer *mamoru_sniffer.Sniffer
 func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "ETH_TESTNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "9eXL1PEfb7XCBWv2J8Jl+1TwRwlcaGHR5HN9cE93tCI=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "ZLXukK0ZoA8oTdFvEl6OTRBM6OuhZN9haxSMcFVZZKc=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "10")
 
