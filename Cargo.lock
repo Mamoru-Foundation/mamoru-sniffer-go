@@ -514,7 +514,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-derive"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
  "darling 0.14.4",
  "maplit",
@@ -527,7 +527,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-macro"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
  "blockchain-data-derive",
  "paste",
@@ -1614,9 +1614,9 @@ checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
 name = "form_urlencoded"
-version = "1.1.0"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9c384f161156f5260c24a097c56119f9be8c798586aecc13afbcbe7b7e26bf8"
+checksum = "a62bc1cf6f830c2ec14a513a9fb124d0a213a629668a4186f329db21fe045652"
 dependencies = [
  "percent-encoding",
 ]
@@ -1999,9 +1999,9 @@ checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
 name = "idna"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e14ddfc70884202db2244c223200c204c2bda1bc6e0998d11b5e024d657209e6"
+checksum = "7d20d6b07bfbc108882d88ed8e37d39636dcc260e15e30c45e6ba089610b917c"
 dependencies = [
  "unicode-bidi",
  "unicode-normalization",
@@ -2321,9 +2321,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "mamoru-chain-client"
+version = "0.1.0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
+dependencies = [
+ "async-stream",
+ "base64 0.20.0",
+ "chrono",
+ "cosmrs",
+ "envy",
+ "futures",
+ "hex",
+ "mamoru-core",
+ "prost",
+ "prost-types",
+ "serde",
+ "strum",
+ "strum_macros",
+ "thiserror",
+ "tokio",
+ "tonic",
+ "tonic-build",
+ "tracing",
+ "url",
+]
+
+[[package]]
 name = "mamoru-core"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
  "as-ffi-bindings",
  "async-trait",
@@ -2351,7 +2377,7 @@ dependencies = [
 [[package]]
 name = "mamoru-evm-types"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
  "blockchain-data-macro",
  "datafusion",
@@ -2363,32 +2389,22 @@ dependencies = [
 [[package]]
 name = "mamoru-sniffer"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
- "async-stream",
- "base64 0.20.0",
- "chrono",
- "cosmrs",
  "envy",
  "futures",
- "hex",
+ "mamoru-chain-client",
  "mamoru-core",
- "prost",
- "prost-types",
  "serde",
- "strum",
- "strum_macros",
  "thiserror",
  "tokio",
- "tonic",
- "tonic-build",
  "tracing",
 ]
 
 [[package]]
 name = "mamoru-sniffer-c"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=dc1503a1e47fdb7d579624773eeba04e85b261e0#dc1503a1e47fdb7d579624773eeba04e85b261e0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=716357e#716357e07d2e59e7fd133a155eeaa9e9e579c776"
 dependencies = [
  "chrono",
  "lazy_static",
@@ -2795,9 +2811,9 @@ dependencies = [
 
 [[package]]
 name = "percent-encoding"
-version = "2.2.0"
+version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "478c572c3d73181ff3c2539045f6eb99e5491218eae919370993b890cdbdd98e"
+checksum = "9b2a4787296e9989611394c33f193f676704af1686e70b8f8033ab5ba9a35a94"
 
 [[package]]
 name = "pest"
@@ -4450,13 +4466,14 @@ checksum = "a156c684c91ea7d62626509bce3cb4e1d9ed5c4d978f7b4352658f96a4c26b4a"
 
 [[package]]
 name = "url"
-version = "2.3.1"
+version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d68c799ae75762b8c3fe375feb6600ef5602c883c5d21eb51c09f22b83c4643"
+checksum = "143b538f18257fac9cad154828a57c6bf5157e1aa604d4816b5995bf6de87ae5"
 dependencies = [
  "form_urlencoded",
  "idna",
  "percent-encoding",
+ "serde",
 ]
 
 [[package]]
