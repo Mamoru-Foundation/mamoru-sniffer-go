@@ -149,6 +149,8 @@ void evm_event_append (
     slice_ref_uint8_t topic4,
     slice_ref_uint8_t data);
 
+void init_logger (void);
+
 typedef struct FfiSnifferResult FfiSnifferResult_t;
 
 FfiSnifferResult_t * new_sniffer (void);
