@@ -23,6 +23,12 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 }
 
 func TestSnifferSmoke(t *testing.T) {
+	_ = os.Setenv("RUST_LOG", "info")
+
+	mamoru_sniffer.InitLogger(func(entry mamoru_sniffer.LogEntry) {
+		t.Log(entry)
+	})
+
 	sniffer, err := testSniffer()
 
 	require.Nil(t, err)

@@ -45,7 +45,7 @@ TRANSLATOR:
       - { action: accept, from: "^blockchain_" }
       - { action: accept, from: "^value_" }
       - { action: accept, from: "^slice_(.+)_t" }
-
+      - { action: accept, from: "^init_logger$" }
       - { transform: export }
     post-global:
       - { action: replace, from: _$ }
