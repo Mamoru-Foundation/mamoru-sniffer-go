@@ -25,8 +25,10 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 func TestSnifferSmoke(t *testing.T) {
 	_ = os.Setenv("RUST_LOG", "info")
 
-	mamoru_sniffer.InitLogger(func(entry mamoru_sniffer.LogEntry) {
-		t.Log(entry)
+	once.Do(func() {
+		mamoru_sniffer.InitLogger(func(entry mamoru_sniffer.LogEntry) {
+			t.Log(entry)
+		})
 	})
 
 	sniffer, err := testSniffer()
@@ -45,7 +47,7 @@ var sniffer *mamoru_sniffer.Sniffer
 func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "ETH_TESTNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "4gHo0h3hL4MOhC4e+fCPSREUsy+DLOKsBgo4MxAyMbU=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "SKCUszUFUg+s7eRXWPkrg0lOFwHgPpHbg8PHNuqOEk0=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "1")
 

@@ -14,6 +14,13 @@
 extern "C" {
 #endif
 
+/** \brief
+ *  Initializes the logger using exported `mamoru_sniffer_logger` function.
+ *  Default log level is `ERROR`, use `export RUST_LOG=info` to enable info logs.
+ *  The logger will be initialized only once.
+ */
+void init_logger (void);
+
 typedef struct FfiEvmBlockchainDataBuilder FfiEvmBlockchainDataBuilder_t;
 
 FfiEvmBlockchainDataBuilder_t * new_evm_blockchain_data_builder (void);
@@ -149,7 +156,123 @@ void evm_event_append (
     slice_ref_uint8_t topic4,
     slice_ref_uint8_t data);
 
-void init_logger (void);
+typedef struct FfiCosmosBlockchainDataBuilder FfiCosmosBlockchainDataBuilder_t;
+
+FfiCosmosBlockchainDataBuilder_t * new_cosmos_blockchain_data_builder (void);
+
+void cosmos_blockchain_data_builder_set_tx (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    char const * tx_id,
+    char const * tx_hash);
+
+void cosmos_blockchain_data_builder_set_block (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    char const * block_id,
+    char const * block_hash);
+
+void cosmos_blockchain_data_builder_set_mempool_source (
+    FfiCosmosBlockchainDataBuilder_t * builder);
+
+void cosmos_blockchain_data_builder_set_statistics (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t blocks,
+    uint64_t transactions,
+    uint64_t events,
+    uint64_t call_traces);
+
+typedef struct FfiCosmosBlockchainDataCtx FfiCosmosBlockchainDataCtx_t;
+
+/** \brief
+ *  Frees `builder` argument.
+ */
+FfiCosmosBlockchainDataCtx_t * cosmos_blockchain_data_builder_finish (
+    FfiCosmosBlockchainDataBuilder_t * builder);
+
+/** \brief
+ *  Frees `data` argument.
+ */
+void cosmos_sniffer_observe_data (
+    FfiSniffer_t const * sniffer,
+    FfiCosmosBlockchainDataCtx_t * data);
+
+void cosmos_transaction_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    slice_ref_uint8_t tx_data,
+    uint32_t code,
+    slice_ref_uint8_t data,
+    char const * log,
+    char const * info,
+    int64_t gas_wanted,
+    int64_t gas_used,
+    char const * codespace);
+
+void cosmos_block_set (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t seq,
+    int64_t height,
+    slice_ref_uint8_t hash,
+    uint64_t version_block,
+    uint64_t version_app,
+    char const * chain_id,
+    int64_t time,
+    slice_ref_uint8_t last_block_id_hash,
+    uint32_t last_block_id_part_set_header_total,
+    slice_ref_uint8_t last_block_id_part_set_header_hash,
+    slice_ref_uint8_t last_commit_hash,
+    slice_ref_uint8_t data_hash,
+    slice_ref_uint8_t validators_hash,
+    slice_ref_uint8_t next_validators_hash,
+    slice_ref_uint8_t consensus_hash,
+    slice_ref_uint8_t app_hash,
+    slice_ref_uint8_t last_results_hash,
+    slice_ref_uint8_t evidence_hash,
+    slice_ref_uint8_t proposer_address,
+    int32_t last_commit_info_round,
+    int64_t consensus_param_updates_block_max_bytes,
+    int64_t consensus_param_updates_block_max_gas,
+    int64_t consensus_param_updates_evidence_max_age_num_blocks,
+    int64_t consensus_param_updates_evidence_max_age_duration,
+    int64_t consensus_param_updates_evidence_max_bytes,
+    char const * consensus_param_updates_validator_pub_key_types,
+    uint64_t consensus_param_updates_version_app);
+
+void cosmos_event_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t seq,
+    char const * event_type);
+
+
+#include <stdbool.h>
+
+void cosmos_event_attribute_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t seq,
+    uint64_t event_seq,
+    char const * key,
+    char const * value,
+    bool index);
+
+void cosmos_validator_update_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t block_seq,
+    slice_ref_uint8_t pub_key,
+    int64_t power);
+
+void cosmos_misbehavior_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t block_seq,
+    char const * typ,
+    int64_t validator_power,
+    char const * validator_address,
+    int64_t height,
+    int64_t time,
+    int64_t total_voting_power);
+
+void cosmos_vote_infos_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    uint64_t block_seq,
+    slice_ref_uint8_t validator,
+    bool signed_last_block);
 
 typedef struct FfiSnifferResult FfiSnifferResult_t;
 
@@ -177,9 +300,6 @@ typedef struct FfiValueData FfiValueData_t;
  */
 FfiValueData_t * new_value_data (
     FfiValue_t * value);
-
-
-#include <stdbool.h>
 
 FfiValue_t * new_value_bool (
     bool data);
