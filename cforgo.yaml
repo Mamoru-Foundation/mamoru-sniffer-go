@@ -33,6 +33,10 @@ TRANSLATOR:
       - { target: "^call_trace_batch_append", tips: [ ref ] }
       - { target: "^block_batch_append", tips: [ ref ] }
       - { target: "^event_batch_append", tips: [ ref ] }
+      - { target: "^cosmos_blockchain_data_builder_", tips: [ ref ] }
+      - { target: "^cosmos_sniffer_observe_data", tips: [ ref, ref ] }
+      - { target: "^cosmos_block_set", tips: [ ref ] }
+      - { target: "^cosmos_(.+)_append", tips: [ ref ] }
     struct:
       - { target: "^slice_(.+)_t", tips: [ sref ] }
   Rules:
@@ -46,6 +50,7 @@ TRANSLATOR:
       - { action: accept, from: "^value_" }
       - { action: accept, from: "^slice_(.+)_t" }
       - { action: accept, from: "^init_logger$" }
+      - { action: accept, from: "^cosmos_" }
       - { transform: export }
     post-global:
       - { action: replace, from: _$ }

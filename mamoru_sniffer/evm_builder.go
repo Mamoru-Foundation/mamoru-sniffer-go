@@ -39,7 +39,7 @@ func (b EvmCtxBuilder) Finish() EvmCtx {
 }
 
 func (b EvmCtxBuilder) SetBlock(block Block) {
-	blockReward := sliceToFfi(block.BlockReward)
+	blockReward := SliceToFfi(block.BlockReward)
 
 	generated_bindings.EvmBlockSet(
 		b.FfiEvmBlockchainDataBuilderT,
@@ -58,12 +58,12 @@ func (b EvmCtxBuilder) SetBlock(block Block) {
 		block.GasLimit,
 	)
 
-	freeFfiSlice(blockReward)
+	FreeFfiSlice(blockReward)
 }
 
 func (b EvmCtxBuilder) AppendTxs(txs []Transaction) {
 	for _, tx := range txs {
-		input := sliceToFfi(tx.Input)
+		input := SliceToFfi(tx.Input)
 		generated_bindings.EvmTransactionAppend(
 			b.FfiEvmBlockchainDataBuilderT,
 			tx.TxIndex,
@@ -82,18 +82,18 @@ func (b EvmCtxBuilder) AppendTxs(txs []Transaction) {
 			input,
 			tx.Size,
 		)
-		freeFfiSlice(input)
+		FreeFfiSlice(input)
 	}
 }
 
 func (b EvmCtxBuilder) AppendEvents(events []Event) {
 	for _, event := range events {
-		topic0 := sliceToFfi(event.Topic0)
-		topic1 := sliceToFfi(event.Topic1)
-		topic2 := sliceToFfi(event.Topic2)
-		topic3 := sliceToFfi(event.Topic3)
-		topic4 := sliceToFfi(event.Topic4)
-		data := sliceToFfi(event.Data)
+		topic0 := SliceToFfi(event.Topic0)
+		topic1 := SliceToFfi(event.Topic1)
+		topic2 := SliceToFfi(event.Topic2)
+		topic3 := SliceToFfi(event.Topic3)
+		topic4 := SliceToFfi(event.Topic4)
+		data := SliceToFfi(event.Data)
 		generated_bindings.EvmEventAppend(
 			b.FfiEvmBlockchainDataBuilderT,
 			event.Index,
@@ -109,18 +109,18 @@ func (b EvmCtxBuilder) AppendEvents(events []Event) {
 			topic4,
 			data,
 		)
-		freeFfiSlice(topic0)
-		freeFfiSlice(topic1)
-		freeFfiSlice(topic2)
-		freeFfiSlice(topic3)
-		freeFfiSlice(topic4)
-		freeFfiSlice(data)
+		FreeFfiSlice(topic0)
+		FreeFfiSlice(topic1)
+		FreeFfiSlice(topic2)
+		FreeFfiSlice(topic3)
+		FreeFfiSlice(topic4)
+		FreeFfiSlice(data)
 	}
 }
 
 func (b EvmCtxBuilder) AppendCallTraces(callTraces []CallTrace) {
 	for _, trace := range callTraces {
-		input := sliceToFfi(trace.Input)
+		input := SliceToFfi(trace.Input)
 		generated_bindings.EvmCallTraceAppend(
 			b.FfiEvmBlockchainDataBuilderT,
 			trace.Seq,
@@ -135,6 +135,6 @@ func (b EvmCtxBuilder) AppendCallTraces(callTraces []CallTrace) {
 			trace.GasUsed,
 			input,
 		)
-		freeFfiSlice(input)
+		FreeFfiSlice(input)
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"unsafe"
 )
 
-func sliceToFfi(bytes []byte) generated_bindings.SliceRefUint8T {
+func SliceToFfi(bytes []byte) generated_bindings.SliceRefUint8T {
 	ptr := C.CBytes(bytes)
 
 	return generated_bindings.SliceRefUint8T{
@@ -18,7 +18,7 @@ func sliceToFfi(bytes []byte) generated_bindings.SliceRefUint8T {
 	}
 }
 
-func freeFfiSlice(slice generated_bindings.SliceRefUint8T) {
+func FreeFfiSlice(slice generated_bindings.SliceRefUint8T) {
 	C.free(unsafe.Pointer(slice.Ptr))
 	slice.Free()
 }
