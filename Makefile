@@ -21,18 +21,16 @@ build-rust-release-macos-aarch64:
 	mkdir -p ./lib/darwin-arm64/
 	cp target/aarch64-apple-darwin/release/$(LIB_NAME) ./packaged/lib/darwin-arm64/
 
-#GODEBUG=cgocheck=2 go test ./mamoru_sniffer -v # for golang < v1.20
 test:
-	GOEXPERIMENT=cgocheck2  go test ./mamoru_sniffer -v
+	GODEBUG=cgocheck=2  go test ./mamoru_sniffer -v
 
-#GODEBUG=cgocheck=2 go test -bench=. ./mamoru_sniffer -v # for golang < v1.20
 bench:
-	GOEXPERIMENT=cgocheck2 go test -bench=. ./mamoru_sniffer -v
+	GODEBUG=cgocheck=2 go test -bench=. ./mamoru_sniffer -v
 
-# Requires manual setup for now
-# 	GODEBUG=cgocheck=2 go test ./tests -v
+# Requires manual setup go v1.21 or later
+# 	GOEXPERIMENT=cgocheck2  go test ./tests -v
 integration-test:
-	GOEXPERIMENT=cgocheck2 go test ./tests -v
+	GODEBUG=cgocheck=2 go test ./tests -v
 
 clean:
 	cargo clean
