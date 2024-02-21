@@ -1,2 +1,3 @@
 # Do not commit binaries unless explicitly forced to
 */libmamoru_sniffer_go.a
+*/libmamoru_sniffer_go.so
