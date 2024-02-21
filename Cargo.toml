@@ -4,7 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = ["staticlib"]
+# It builds static and shared libraries
+crate-type = ["staticlib", "cdylib"]
 
 [profile.release]
 opt-level = "z"
@@ -12,5 +13,5 @@ strip = true
 lto = true
 
 [dependencies]
-#mamoru-sniffer-c = {path = "../mamoru-core/mamoru-sniffer-c"}
-mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "428a62190c6b60bbf2db462f44fe3aa27de28f14"}
+mamoru-sniffer-c = {path = "../mamoru-core/mamoru-sniffer-c"}
+#mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "428a62190c6b60bbf2db462f44fe3aa27de28f14"}

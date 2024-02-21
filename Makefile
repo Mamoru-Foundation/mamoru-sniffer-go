@@ -1,10 +1,11 @@
-BINARY_DIR = ./packaged/lib/$$(go env GOOS)-$$(go env GOARCH)
-LIB_NAME = libmamoru_sniffer_go.a
+BINARY_DIR = ${CURDIR}/packaged/lib/$$(go env GOOS)-$$(go env GOARCH)
+LIB_NAME = libmamoru_sniffer_go.so
+C-FOR-GO = c-for-go
+
 
 dev: build-rust generate-go-bindings test
-
 generate-go-bindings:
-	c-for-go cforgo.yaml
+	$(C-FOR-GO) cforgo.yaml
 
 build-rust:
 	cargo build
@@ -22,15 +23,21 @@ build-rust-release-macos-aarch64:
 	cp target/aarch64-apple-darwin/release/$(LIB_NAME) ./packaged/lib/darwin-arm64/
 
 test:
-	GODEBUG=cgocheck=2  go test ./mamoru_sniffer -v
+	@export LD_LIBRARY_PATH=$(BINARY_DIR):$$LD_LIBRARY_PATH ;  \
+	GODEBUG=cgocheck=2 ; \
+	go test ./mamoru_sniffer -v
 
 bench:
-	GODEBUG=cgocheck=2 go test -bench=. ./mamoru_sniffer -v
+	@export LD_LIBRARY_PATH=$(BINARY_DIR):$$LD_LIBRARY_PATH ;  \
+	GODEBUG=cgocheck=2 ; \
+	go test -bench=. ./mamoru_sniffer -v
 
 # Requires manual setup go v1.21 or later
 # 	GOEXPERIMENT=cgocheck2  go test ./tests -v
 integration-test:
-	GODEBUG=cgocheck=2 go test ./tests -v
+	export LD_LIBRARY_PATH=$(BINARY_DIR):$$LD_LIBRARY_PATH; \
+	GODEBUG=cgocheck=2 ; \
+	go test ./tests -v
 
 clean:
 	cargo clean
