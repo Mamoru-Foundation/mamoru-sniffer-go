@@ -2,6 +2,7 @@ package cosmos
 
 import (
 	"github.com/Mamoru-Foundation/mamoru-sniffer-go/mamoru_sniffer"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
@@ -32,23 +33,23 @@ func createCosmosCtx() CosmosCtx {
 	builder.SetBlock(Block{
 		Seq:                                0,
 		Height:                             0,
-		Hash:                               []byte{1, 2, 3, 4, 5},
+		Hash:                               "some_hash",
 		VersionBlock:                       0,
 		VersionApp:                         0,
 		ChainId:                            "",
 		Time:                               0,
-		LastBlockIdHash:                    nil,
+		LastBlockIdHash:                    "some_hash",
 		LastBlockIdPartSetHeaderTotal:      0,
-		LastBlockIdPartSetHeaderHash:       nil,
-		LastCommitHash:                     nil,
-		DataHash:                           nil,
-		ValidatorsHash:                     nil,
-		NextValidatorsHash:                 nil,
-		ConsensusHash:                      nil,
-		AppHash:                            nil,
-		LastResultsHash:                    nil,
-		EvidenceHash:                       nil,
-		ProposerAddress:                    nil,
+		LastBlockIdPartSetHeaderHash:       "some_hash",
+		LastCommitHash:                     "some_hash",
+		DataHash:                           "some_hash",
+		ValidatorsHash:                     "some_hash",
+		NextValidatorsHash:                 "some_hash",
+		ConsensusHash:                      "some_hash",
+		AppHash:                            "some_hash",
+		LastResultsHash:                    "some_hash",
+		EvidenceHash:                       "some_hash",
+		ProposerAddress:                    "some_hash",
 		LastCommitInfoRound:                0,
 		ConsensusParamUpdatesBlockMaxBytes: 0,
 		ConsensusParamUpdatesBlockMaxGas:   0,
@@ -67,9 +68,9 @@ func createCosmosCtx() CosmosCtx {
 			Data: nil,
 		},
 		{
-			Seq:  0,
+			Seq:  1,
 			Tx:   []byte{1, 2, 3, 4, 5},
-			Code: 0,
+			Code: 2,
 			Data: []byte{1, 2, 3, 4, 5},
 		},
 	})
@@ -80,21 +81,21 @@ func createCosmosCtx() CosmosCtx {
 			EventType: "",
 		},
 		{
-			Seq:       0,
+			Seq:       1,
 			EventType: "string",
 		},
 	})
 
 	builder.AppendMisbehaviors([]Misbehavior{
 		{
-			Seq:              0,
-			BlockSeq:         0,
-			Typ:              "",
-			ValidatorPower:   0,
+			Seq:              1,
+			BlockSeq:         1,
+			Typ:              "some_type",
+			ValidatorPower:   1,
 			ValidatorAddress: "some_address",
-			Height:           0,
-			Time:             0,
-			TotalVotingPower: 0,
+			Height:           1,
+			Time:             1,
+			TotalVotingPower: 1,
 		},
 	})
 
@@ -126,4 +127,12 @@ func createCosmosCtx() CosmosCtx {
 	builder.SetStatistics(1, 2, 3, 4)
 
 	return builder.Finish()
+}
+
+func TestCosmosCtxBuilderSetsTxData(t *testing.T) {
+	builder := NewCosmosCtxBuilder()
+	builder.SetTxData("txId", "txHash")
+	builder.SetBlockData("blockId", "blockHash")
+	builder.SetStatistics(1, 2, 3, 4)
+	assert.NotNil(t, builder)
 }
