@@ -42,40 +42,27 @@ func (b CosmosCtxBuilder) Finish() CosmosCtx {
 }
 
 func (b CosmosCtxBuilder) SetBlock(block Block) {
-	hash := mamoru_sniffer.SliceToFfi(block.Hash)
-	lastBlockIdHash := mamoru_sniffer.SliceToFfi(block.LastBlockIdHash)
-	lastResultsHash := mamoru_sniffer.SliceToFfi(block.LastResultsHash)
-	lastCommitHash := mamoru_sniffer.SliceToFfi(block.LastCommitHash)
-	appHash := mamoru_sniffer.SliceToFfi(block.AppHash)
-	consensusHash := mamoru_sniffer.SliceToFfi(block.ConsensusHash)
-	nextValidatorsHash := mamoru_sniffer.SliceToFfi(block.NextValidatorsHash)
-	dataHash := mamoru_sniffer.SliceToFfi(block.DataHash)
-	validatorsHash := mamoru_sniffer.SliceToFfi(block.ValidatorsHash)
-	lastBlockIdPartSetHeaderHash := mamoru_sniffer.SliceToFfi(block.LastBlockIdPartSetHeaderHash)
-	evidenceHash := mamoru_sniffer.SliceToFfi(block.EvidenceHash)
-	proposerAddress := mamoru_sniffer.SliceToFfi(block.ProposerAddress)
-
 	generated_bindings.CosmosBlockSet(
 		b.FfiCosmosBlockchainDataBuilderT,
 		block.Seq,
 		block.Height,
-		hash,
+		block.Hash,
 		block.VersionBlock,
 		block.VersionApp,
 		block.ChainId,
 		block.Time,
-		lastBlockIdHash,
+		block.LastBlockIdHash,
 		block.LastBlockIdPartSetHeaderTotal,
-		lastBlockIdPartSetHeaderHash,
-		lastCommitHash,
-		dataHash,
-		validatorsHash,
-		nextValidatorsHash,
-		consensusHash,
-		appHash,
-		lastResultsHash,
-		evidenceHash,
-		proposerAddress,
+		block.LastBlockIdPartSetHeaderHash,
+		block.LastCommitHash,
+		block.DataHash,
+		block.ValidatorsHash,
+		block.NextValidatorsHash,
+		block.ConsensusHash,
+		block.AppHash,
+		block.LastResultsHash,
+		block.EvidenceHash,
+		block.ProposerAddress,
 		block.LastCommitInfoRound,
 		block.ConsensusParamUpdatesBlockMaxBytes,
 		block.ConsensusParamUpdatesBlockMaxGas,
@@ -85,19 +72,6 @@ func (b CosmosCtxBuilder) SetBlock(block Block) {
 		block.ConsensusParamUpdatesValidatorPubKeyTypes,
 		block.ConsensusParamUpdatesVersionApp,
 	)
-
-	mamoru_sniffer.FreeFfiSlice(hash)
-	mamoru_sniffer.FreeFfiSlice(lastBlockIdHash)
-	mamoru_sniffer.FreeFfiSlice(lastResultsHash)
-	mamoru_sniffer.FreeFfiSlice(lastCommitHash)
-	mamoru_sniffer.FreeFfiSlice(appHash)
-	mamoru_sniffer.FreeFfiSlice(consensusHash)
-	mamoru_sniffer.FreeFfiSlice(nextValidatorsHash)
-	mamoru_sniffer.FreeFfiSlice(dataHash)
-	mamoru_sniffer.FreeFfiSlice(validatorsHash)
-	mamoru_sniffer.FreeFfiSlice(lastBlockIdPartSetHeaderHash)
-	mamoru_sniffer.FreeFfiSlice(evidenceHash)
-	mamoru_sniffer.FreeFfiSlice(proposerAddress)
 }
 
 func (b CosmosCtxBuilder) AppendTxs(txs []Transaction) {
@@ -174,14 +148,12 @@ func (b CosmosCtxBuilder) AppendMisbehaviors(misbehaviors []Misbehavior) {
 
 func (b CosmosCtxBuilder) AppendVoteInfos(voteInfos []VoteInfo) {
 	for _, vi := range voteInfos {
-		validator := mamoru_sniffer.SliceToFfi(vi.Validator)
-
 		generated_bindings.CosmosVoteInfosAppend(
 			b.FfiCosmosBlockchainDataBuilderT,
 			vi.BlockSeq,
-			validator,
+			vi.ValidatorAddress,
+			vi.ValidatorPower,
 			vi.SignedLastBlock,
 		)
-		mamoru_sniffer.FreeFfiSlice(validator)
 	}
 }

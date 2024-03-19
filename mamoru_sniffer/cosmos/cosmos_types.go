@@ -3,23 +3,23 @@ package cosmos
 type Block struct {
 	Seq                                          uint64
 	Height                                       int64
-	Hash                                         []byte
+	Hash                                         string
 	VersionBlock                                 uint64
 	VersionApp                                   uint64
 	ChainId                                      string
 	Time                                         int64
-	LastBlockIdHash                              []byte
+	LastBlockIdHash                              string
 	LastBlockIdPartSetHeaderTotal                uint32
-	LastBlockIdPartSetHeaderHash                 []byte
-	LastCommitHash                               []byte
-	DataHash                                     []byte
-	ValidatorsHash                               []byte
-	NextValidatorsHash                           []byte
-	ConsensusHash                                []byte
-	AppHash                                      []byte
-	LastResultsHash                              []byte
-	EvidenceHash                                 []byte
-	ProposerAddress                              []byte
+	LastBlockIdPartSetHeaderHash                 string
+	LastCommitHash                               string
+	DataHash                                     string
+	ValidatorsHash                               string
+	NextValidatorsHash                           string
+	ConsensusHash                                string
+	AppHash                                      string
+	LastResultsHash                              string
+	EvidenceHash                                 string
+	ProposerAddress                              string
 	LastCommitInfoRound                          int32
 	ConsensusParamUpdatesBlockMaxBytes           int64
 	ConsensusParamUpdatesBlockMaxGas             int64
@@ -32,7 +32,7 @@ type Block struct {
 
 type ValidatorUpdate struct {
 	Seq    uint64
-	PubKey []byte
+	PubKey []byte //Ed25519 PubKey
 	Power  int64
 }
 
@@ -48,10 +48,11 @@ type Misbehavior struct {
 }
 
 type VoteInfo struct {
-	Seq             uint64
-	BlockSeq        uint64
-	Validator       []byte
-	SignedLastBlock bool
+	Seq              uint64
+	BlockSeq         uint64
+	ValidatorAddress string
+	ValidatorPower   int64
+	SignedLastBlock  bool
 }
 
 type Transaction struct {
