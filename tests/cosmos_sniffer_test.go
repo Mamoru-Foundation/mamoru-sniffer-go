@@ -47,9 +47,9 @@ func TestCosmosSnifferSmoke(t *testing.T) {
 var cosmosSniffer *cosmos.SnifferCosmos
 
 func testCosmosSniffer() (*cosmos.SnifferCosmos, error) {
-	_ = os.Setenv("MAMORU_CHAIN_TYPE", "OSMOSIS_TESTNET")
+	_ = os.Setenv("MAMORU_CHAIN_TYPE", "KAVA_TESTNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "SKCUszUFUg+s7eRXWPkrg0lOFwHgPpHbg8PHNuqOEk0=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "hb3sGTv5KSbWTCQXalY8CCUfBFUZuUNIbMjp2oRqvjM=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "1")
 
@@ -71,23 +71,23 @@ func createCosmosCtx() cosmos.CosmosCtx {
 	builder.SetBlock(cosmos.Block{
 		Seq:                                0,
 		Height:                             0,
-		Hash:                               []byte{1, 2, 3, 4, 5},
+		Hash:                               "some_hash",
 		VersionBlock:                       0,
 		VersionApp:                         0,
 		ChainId:                            "",
 		Time:                               0,
-		LastBlockIdHash:                    nil,
+		LastBlockIdHash:                    "some_hash",
 		LastBlockIdPartSetHeaderTotal:      0,
-		LastBlockIdPartSetHeaderHash:       nil,
-		LastCommitHash:                     nil,
-		DataHash:                           nil,
-		ValidatorsHash:                     nil,
-		NextValidatorsHash:                 nil,
-		ConsensusHash:                      nil,
-		AppHash:                            nil,
-		LastResultsHash:                    nil,
-		EvidenceHash:                       nil,
-		ProposerAddress:                    nil,
+		LastBlockIdPartSetHeaderHash:       "some_hash",
+		LastCommitHash:                     "some_hash",
+		DataHash:                           "some_hash",
+		ValidatorsHash:                     "some_hash",
+		NextValidatorsHash:                 "some_hash",
+		ConsensusHash:                      "some_hash",
+		AppHash:                            "some_hash",
+		LastResultsHash:                    "some_hash",
+		EvidenceHash:                       "some_hash",
+		ProposerAddress:                    "some_hash",
 		LastCommitInfoRound:                0,
 		ConsensusParamUpdatesBlockMaxBytes: 0,
 		ConsensusParamUpdatesBlockMaxGas:   0,
@@ -136,16 +136,18 @@ func createCosmosCtx() cosmos.CosmosCtx {
 
 	builder.AppendVoteInfos([]cosmos.VoteInfo{
 		{
-			Seq:             0,
-			BlockSeq:        0,
-			Validator:       nil,
-			SignedLastBlock: false,
+			Seq:              0,
+			BlockSeq:         0,
+			ValidatorAddress: "",
+			ValidatorPower:   0,
+			SignedLastBlock:  false,
 		},
 		{
-			Seq:             0,
-			BlockSeq:        0,
-			Validator:       nil,
-			SignedLastBlock: false,
+			Seq:              0,
+			BlockSeq:         0,
+			ValidatorAddress: "",
+			ValidatorPower:   0,
+			SignedLastBlock:  false,
 		},
 	})
 
@@ -153,6 +155,8 @@ func createCosmosCtx() cosmos.CosmosCtx {
 		{
 			Seq:       0,
 			Tx:        nil,
+			TxHash:    "",
+			TxIndex:   0,
 			Code:      0,
 			Data:      nil,
 			Log:       "",
@@ -164,6 +168,8 @@ func createCosmosCtx() cosmos.CosmosCtx {
 		{
 			Seq:       0,
 			Tx:        nil,
+			TxHash:    "",
+			TxIndex:   0,
 			Code:      0,
 			Data:      nil,
 			Log:       "",

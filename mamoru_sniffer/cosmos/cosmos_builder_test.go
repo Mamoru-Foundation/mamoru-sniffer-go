@@ -62,16 +62,30 @@ func createCosmosCtx() CosmosCtx {
 
 	builder.AppendTxs([]Transaction{
 		{
-			Seq:  0,
-			Tx:   nil,
-			Code: 0,
-			Data: nil,
+			Seq:       0,
+			Tx:        nil,
+			TxHash:    "some_hash",
+			TxIndex:   0,
+			Code:      0,
+			Data:      nil,
+			Log:       "",
+			Info:      "",
+			GasWanted: 0,
+			GasUsed:   0,
+			Codespace: "",
 		},
 		{
-			Seq:  1,
-			Tx:   []byte{1, 2, 3, 4, 5},
-			Code: 2,
-			Data: []byte{1, 2, 3, 4, 5},
+			Seq:       1,
+			Tx:        nil,
+			TxHash:    "some_hash",
+			TxIndex:   1,
+			Code:      0,
+			Data:      nil,
+			Log:       "",
+			Info:      "",
+			GasWanted: 0,
+			GasUsed:   0,
+			Codespace: "",
 		},
 	})
 
@@ -118,6 +132,25 @@ func createCosmosCtx() CosmosCtx {
 			Key:      "",
 			Value:    "",
 			Index:    false,
+		},
+	})
+
+	builder.AppendEvmCallTraces([]EvmCallTrace{
+		{
+			TxHash:       "some_hash",
+			TxIndex:      1,
+			BlockIndex:   2,
+			Depth:        3,
+			Type:         "some-type",
+			From:         "from",
+			To:           "to",
+			Value:        4,
+			GasLimit:     5,
+			GasUsed:      6,
+			Input:        nil,
+			Output:       "output",
+			Error:        "error",
+			RevertReason: "revert-reason",
 		},
 	})
 

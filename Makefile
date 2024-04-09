@@ -22,7 +22,7 @@ build-rust-release-macos-aarch64:
 	cp target/aarch64-apple-darwin/release/$(LIB_NAME) ./packaged/lib/darwin-arm64/
 
 test:
-	GODEBUG=cgocheck=2  go test ./mamoru_sniffer -v
+	GODEBUG=cgocheck=2  go test ./mamoru_sniffer/... -v
 
 bench:
 	GODEBUG=cgocheck=2 go test -bench=. ./mamoru_sniffer -v

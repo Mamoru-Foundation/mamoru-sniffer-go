@@ -674,7 +674,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-derive"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "darling 0.14.4",
  "maplit",
@@ -687,7 +687,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-macro"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "blockchain-data-derive",
  "paste",
@@ -775,9 +775,9 @@ dependencies = [
 
 [[package]]
 name = "byteorder"
-version = "1.4.3"
+version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
+checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "bytes"
@@ -2943,7 +2943,7 @@ dependencies = [
 [[package]]
 name = "mamoru-chain-client"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "async-stream",
  "base64 0.20.0",
@@ -2969,7 +2969,7 @@ dependencies = [
 [[package]]
 name = "mamoru-core"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "anyhow",
  "as-ffi-bindings",
@@ -3003,7 +3003,7 @@ dependencies = [
 [[package]]
 name = "mamoru-cosmos-types"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "blockchain-data-macro",
  "datafusion",
@@ -3015,7 +3015,7 @@ dependencies = [
 [[package]]
 name = "mamoru-evm-types"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "blockchain-data-macro",
  "datafusion",
@@ -3027,7 +3027,7 @@ dependencies = [
 [[package]]
 name = "mamoru-sniffer"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "base64 0.21.5",
  "envy",
@@ -3043,7 +3043,7 @@ dependencies = [
 [[package]]
 name = "mamoru-sniffer-c"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=2b4e92810fd61b35702b8dd81b40df87ecae2ee0#2b4e92810fd61b35702b8dd81b40df87ecae2ee0"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740#71e95cf8b78fbf6b74e37afc3fc3d081ef5e1740"
 dependencies = [
  "chrono",
  "lazy_static",

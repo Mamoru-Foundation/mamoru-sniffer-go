@@ -81,6 +81,8 @@ func (b CosmosCtxBuilder) AppendTxs(txs []Transaction) {
 		generated_bindings.CosmosTransactionAppend(
 			b.FfiCosmosBlockchainDataBuilderT,
 			txData,
+			tx.TxHash,
+			tx.TxIndex,
 			tx.Code,
 			data,
 			tx.Log,
@@ -155,5 +157,29 @@ func (b CosmosCtxBuilder) AppendVoteInfos(voteInfos []VoteInfo) {
 			vi.ValidatorPower,
 			vi.SignedLastBlock,
 		)
+	}
+}
+
+func (b CosmosCtxBuilder) AppendEvmCallTraces(evmCallTraces []EvmCallTrace) {
+	for _, ect := range evmCallTraces {
+		input := mamoru_sniffer.SliceToFfi(ect.Input)
+		generated_bindings.CosmosEvmCallTraceAppend(
+			b.FfiCosmosBlockchainDataBuilderT,
+			ect.TxHash,
+			ect.Depth,
+			ect.TxIndex,
+			ect.BlockIndex,
+			ect.Type,
+			ect.From,
+			ect.To,
+			ect.Value,
+			ect.GasLimit,
+			ect.GasUsed,
+			input,
+			ect.Output,
+			ect.Error,
+			ect.RevertReason,
+		)
+		mamoru_sniffer.FreeFfiSlice(input)
 	}
 }

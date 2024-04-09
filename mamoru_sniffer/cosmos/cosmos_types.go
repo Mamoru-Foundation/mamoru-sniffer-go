@@ -58,6 +58,8 @@ type VoteInfo struct {
 type Transaction struct {
 	Seq       uint64
 	Tx        []byte
+	TxHash    string
+	TxIndex   uint32
 	Code      uint32
 	Data      []byte
 	Log       string
@@ -78,4 +80,21 @@ type EventAttribute struct {
 	Key      string
 	Value    string
 	Index    bool
+}
+
+type EvmCallTrace struct {
+	TxHash       string
+	TxIndex      uint32
+	BlockIndex   int64
+	Depth        uint32
+	Type         string
+	From         string
+	To           string
+	Value        uint64
+	GasLimit     uint64
+	GasUsed      uint64
+	Input        []byte
+	Output       string
+	Error        string
+	RevertReason string
 }

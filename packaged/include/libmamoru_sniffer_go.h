@@ -89,6 +89,8 @@ typedef struct slice_ref_uint8 {
 void cosmos_transaction_append (
     FfiCosmosBlockchainDataBuilder_t * builder,
     slice_ref_uint8_t tx_data,
+    char const * tx_hash,
+    uint32_t tx_index,
     uint32_t code,
     slice_ref_uint8_t data,
     char const * log,
@@ -165,6 +167,23 @@ void cosmos_vote_infos_append (
     char const * validator_adders,
     int64_t validator_power,
     bool signed_last_block);
+
+void cosmos_evm_call_trace_append (
+    FfiCosmosBlockchainDataBuilder_t * builder,
+    char const * tx_hash,
+    uint32_t depth,
+    uint32_t tx_index,
+    int64_t block_index,
+    char const * typ,
+    char const * from,
+    char const * to,
+    uint64_t value,
+    uint64_t gas_limit,
+    uint64_t gas_used,
+    slice_ref_uint8_t input,
+    char const * output,
+    char const * error,
+    char const * revert_reason);
 
 typedef struct FfiEvmBlockchainDataBuilder FfiEvmBlockchainDataBuilder_t;
 
