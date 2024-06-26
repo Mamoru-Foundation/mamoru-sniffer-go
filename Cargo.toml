@@ -13,4 +13,4 @@ lto = true
 
 [dependencies]
 #mamoru-sniffer-c = {path = "../mamoru-core/mamoru-sniffer-c"}
-mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "7b6d4612cb8fc452eb87dd00f54104b1095c3f64"}
+mamoru-sniffer-c = {git = "https://github.com/Mamoru-Foundation/mamoru-core", rev = "cb2d3833"}
