@@ -665,7 +665,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-derive"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "darling 0.14.4",
  "maplit",
@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "blockchain-data-macro"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "blockchain-data-derive",
  "paste",
@@ -1002,7 +1002,7 @@ dependencies = [
 [[package]]
 name = "cosmos-sdk-proto"
 version = "0.19.0"
-source = "git+https://github.com/Mamoru-Foundation/cosmos-rust.git?rev=6761b0874b0bb73a01d6fecddf90ecb58abc7b03#6761b0874b0bb73a01d6fecddf90ecb58abc7b03"
+source = "git+https://github.com/Mamoru-Foundation/cosmos-rust.git?rev=5e0ed6c#5e0ed6c6b568fdc972ddd8e75286a54ce9cd951f"
 dependencies = [
  "prost",
  "prost-types",
@@ -1013,7 +1013,7 @@ dependencies = [
 [[package]]
 name = "cosmrs"
 version = "0.14.0"
-source = "git+https://github.com/Mamoru-Foundation/cosmos-rust.git?rev=6761b0874b0bb73a01d6fecddf90ecb58abc7b03#6761b0874b0bb73a01d6fecddf90ecb58abc7b03"
+source = "git+https://github.com/Mamoru-Foundation/cosmos-rust.git?rev=5e0ed6c#5e0ed6c6b568fdc972ddd8e75286a54ce9cd951f"
 dependencies = [
  "bip32",
  "cosmos-sdk-proto",
@@ -2937,7 +2937,7 @@ dependencies = [
 [[package]]
 name = "mamoru-chain-client"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "async-stream",
  "base64 0.20.0",
@@ -2963,7 +2963,7 @@ dependencies = [
 [[package]]
 name = "mamoru-core"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "anyhow",
  "as-ffi-bindings",
@@ -2997,7 +2997,7 @@ dependencies = [
 [[package]]
 name = "mamoru-cosmos-types"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "blockchain-data-macro",
  "datafusion",
@@ -3009,7 +3009,7 @@ dependencies = [
 [[package]]
 name = "mamoru-evm-types"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "blockchain-data-macro",
  "datafusion",
@@ -3021,7 +3021,7 @@ dependencies = [
 [[package]]
 name = "mamoru-sniffer"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "base64 0.21.5",
  "envy",
@@ -3037,7 +3037,7 @@ dependencies = [
 [[package]]
 name = "mamoru-sniffer-c"
 version = "0.1.0"
-source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=cb2d3833#cb2d3833cc53d2cb24a8c792ee41a685b6ba9ef3"
+source = "git+https://github.com/Mamoru-Foundation/mamoru-core?rev=b2e6add34d2e3c69c76e52f0fceff5d3ddee1359#b2e6add34d2e3c69c76e52f0fceff5d3ddee1359"
 dependencies = [
  "chrono",
  "lazy_static",

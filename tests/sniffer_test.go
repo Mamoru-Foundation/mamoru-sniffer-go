@@ -6,6 +6,7 @@ import (
 	"os"
 	"sync"
 	"testing"
+	"time"
 )
 
 func BenchmarkSnifferSmoke(b *testing.B) {
@@ -16,15 +17,14 @@ func BenchmarkSnifferSmoke(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		ctx := createEvmCtx()
+		ctx := createEvmCtx(true)
 
 		sniffer.ObserveEvmData(ctx)
 	}
 }
 
 func TestSnifferSmoke(t *testing.T) {
-	_ = os.Setenv("RUST_LOG", "info")
-
+	_ = os.Setenv("RUST_LOG", "info,mamoru_core=debug")
 	once.Do(func() {
 		mamoru_sniffer.InitLogger(func(entry mamoru_sniffer.LogEntry) {
 			t.Log(entry)
@@ -36,9 +36,15 @@ func TestSnifferSmoke(t *testing.T) {
 	require.Nil(t, err)
 	require.NotNil(t, sniffer)
 
-	ctx := createEvmCtx()
+	ctx := createEvmCtx(true)
 
 	sniffer.ObserveEvmData(ctx)
+
+	ctxBlock := createEvmCtx(false)
+
+	sniffer.ObserveEvmData(ctxBlock)
+
+	time.Sleep(5 * time.Second)
 }
 
 var mutex sync.Mutex
@@ -47,7 +53,7 @@ var sniffer *mamoru_sniffer.Sniffer
 func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "ETH_TESTNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "SKCUszUFUg+s7eRXWPkrg0lOFwHgPpHbg8PHNuqOEk0=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "cRvc1LsuKXpitmoeZAjGbdUWaoZQWjgaWZPPJbVaIT0=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "1")
 
@@ -63,7 +69,7 @@ func testSniffer() (*mamoru_sniffer.Sniffer, error) {
 	return sniffer, err
 }
 
-func createEvmCtx() mamoru_sniffer.EvmCtx {
+func createEvmCtx(mempool bool) mamoru_sniffer.EvmCtx {
 	builder := mamoru_sniffer.NewEvmCtxBuilder()
 
 	builder.SetBlock(mamoru_sniffer.Block{
@@ -176,7 +182,9 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 			Input:      []byte{1, 2, 3, 4, 5},
 		},
 	})
-	builder.SetMempoolSource()
+	if mempool {
+		builder.SetMempoolSource()
+	}
 
 	builder.SetStatistics(1, 20, 30, 40)
 	builder.SetBlockData("1", "0xtest_block_hash")
@@ -184,3 +192,32 @@ func createEvmCtx() mamoru_sniffer.EvmCtx {
 
 	return builder.Finish()
 }
+
+// Public this agent for testing Incidents report to MamoruCain(Validation Chain) ETH_TESTNET
+// must send 2 incidents for mempool and block
+/*
+import { EvmCtx } from "@mamoru-ai/mamoru-evm-sdk-as/assembly"
+import {IncidentSeverity, report} from "@mamoru-ai/mamoru-sdk-as/assembly"
+
+export function main(): void {
+  const ctx = EvmCtx.load();
+  const block = ctx.block;
+  const txs = ctx.txs;
+  const events = ctx.events;
+  const calltraces = ctx.callTraces;
+
+  if (block == null) {
+    report(
+        "dummy-debug-evm",
+        IncidentSeverity.Info,
+        `Tx len: ${txs.length}; Env len: ${events.length}; Calltrace len: ${calltraces.length}`,
+    );
+    return;
+  }
+  report(
+      "dummy-debug-evm",
+      IncidentSeverity.Info,
+      `Block number: ${block.blockIndex}; Block time: ${block.timestamp}`,
+  );
+}
+*/
