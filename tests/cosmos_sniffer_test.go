@@ -26,7 +26,7 @@ func BenchmarkCosmosSnifferSmoke(b *testing.B) {
 }
 
 func TestCosmosSnifferSmoke(t *testing.T) {
-	_ = os.Setenv("RUST_LOG", "info")
+	_ = os.Setenv("RUST_LOG", "info,mamoru_core=debug")
 
 	once.Do(func() {
 		mamoru_sniffer.InitLogger(func(entry mamoru_sniffer.LogEntry) {
@@ -47,15 +47,28 @@ func TestCosmosSnifferSmoke(t *testing.T) {
 var cosmosSniffer *cosmos.SnifferCosmos
 
 func testCosmosSniffer() (*cosmos.SnifferCosmos, error) {
-	_ = os.Setenv("MAMORU_CHAIN_TYPE", "KAVA_TESTNET")
+	const storageDir = "/tmp/mamoru-storage-api"
+	var err error
+
+	if stat, _ := os.Stat(storageDir); !stat.IsDir() {
+		err = os.Mkdir(storageDir, 0755)
+		if err != nil {
+			return nil, err
+		}
+		defer func() {
+			os.Remove(storageDir)
+		}()
+	}
+	_ = os.Setenv("MAMORU_STORAGE_API_DIR", storageDir)
+	_ = os.Setenv("MAMORU_CHAIN_TYPE", "PROVENANCE_MAINNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "hb3sGTv5KSbWTCQXalY8CCUfBFUZuUNIbMjp2oRqvjM=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "KEzDqLinan69Ybx5HAQ7J/mxC3eH+IZJ5inoUdTIs70=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
+	_ = os.Setenv("MAMORU_STORAGE_TRACK_LAST_EXECUTED_BLOCK", "true")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "1")
 
 	mutex.Lock()
 
-	var err error
 	if cosmosSniffer == nil {
 		cosmosSniffer, err = cosmos.CosmosConnect()
 	}
@@ -75,7 +88,7 @@ func createCosmosCtx() cosmos.CosmosCtx {
 		VersionBlock:                       0,
 		VersionApp:                         0,
 		ChainId:                            "",
-		Time:                               0,
+		Time:                               1,
 		LastBlockIdHash:                    "some_hash",
 		LastBlockIdPartSetHeaderTotal:      0,
 		LastBlockIdPartSetHeaderHash:       "some_hash",
