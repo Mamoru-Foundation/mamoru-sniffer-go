@@ -62,7 +62,7 @@ func testCosmosSniffer() (*cosmos.SnifferCosmos, error) {
 	_ = os.Setenv("MAMORU_STORAGE_API_DIR", storageDir)
 	_ = os.Setenv("MAMORU_CHAIN_TYPE", "PROVENANCE_MAINNET")
 	_ = os.Setenv("MAMORU_ENDPOINT", "http://localhost:9090")
-	_ = os.Setenv("MAMORU_PRIVATE_KEY", "KEzDqLinan69Ybx5HAQ7J/mxC3eH+IZJ5inoUdTIs70=")
+	_ = os.Setenv("MAMORU_PRIVATE_KEY", "8fgJ9GnfgiDyJH6ixNEY6mBj3ZTWykKeDAIyn5WjXq0=")
 	_ = os.Setenv("MAMORU_CHAIN_ID", "validationchain")
 	_ = os.Setenv("MAMORU_STORAGE_TRACK_LAST_EXECUTED_BLOCK", "true")
 	_ = os.Setenv("MAMORU_STATISTICS_SEND_INTERVAL_SECS", "1")
